@@ -71,7 +71,20 @@ body {
   grid-gap: 50px;
   padding: 0 50px 50px 0;
   background: linear-gradient(to right, transparent 250px, #fff 250px);
+  animation: fadeIn 0.3s forwards;
 }
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translate3d(50px, 0, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0px, 0, 0);
+  }
+}
+
 .modal_img {
   margin-top: 50px;
   box-shadow: 0 3px 4px rgba(0, 0, 0, 0.1), 0 4px 10px rgba(0, 0, 0, 0.2);
@@ -121,4 +134,17 @@ body {
 
 .modal_btn:active {
   background: #808080;
+}
+
+.modal_fechar {
+  border-radius: 50%;
+  border: 2px solid #000;
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 3px 4px rgba(0, 0, 0, 0.1), 0 4px 10px rgba(0, 0, 0, 0.2);
 }
