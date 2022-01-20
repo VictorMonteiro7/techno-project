@@ -20,8 +20,14 @@
     <header class="header">
       <img src="./assets/techno.svg" alt="Logo Techno" class="logo">
       <div class="carrinho_menu">
-        {{carrinhoTotal}}
+        {{carrinhoTotal | numeroPreco}} | {{carrinho.length}}
       </div>
+      <ul>
+        <li v-for="(item, index) in carrinho">
+          <p>{{item.nome}}</p>
+          <button @click="removerItem(index)">X</button>
+        </li>
+      </ul>
     </header>
     <section class="produtos">
       <div v-for="produto in produtos" class="produto" :key="produto.id" @click="abrirModal(produto.id)">

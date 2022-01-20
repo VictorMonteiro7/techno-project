@@ -2,9 +2,8 @@ const vm = new Vue({
   el: "#app",
   data: {
     produtos: {},
-    produto: false,
-    carrinhoTotal: 0,
-    carrinho: []
+    produto: false,    
+    carrinho: [],    
   },
   methods: {
     fetchProdutos(){
@@ -29,18 +28,31 @@ const vm = new Vue({
       })      
     },
     adicionarItem(){      
-      const botaoCompra = this.$refs['btn'];      
-      let estoque = this.produto.estoque;         
-      if(estoque > 0){    
-        estoque--;
-        this.produto.estoque = estoque;
-        this.carrinhoTotal++;           
+      const botaoCompra = this.$refs['btn'];            
+      if(this.produto.estoque > 0){    
+        this.produto.estoque--;
+        const {id, nome, preco} = this.produto;
+        this.carrinho.push({id, nome, preco});
       }   
-      if(estoque === 0){
+      if(this.produto.estoque === 0){
         botaoCompra.innerText = "Produto esgotado";
         botaoCompra.disabled = true;
       }
+    },
+    removerItem(index){
+      this.carrinho.splice(index, 1)
     }     
+  },
+  computed: {
+    carrinhoTotal(){
+      let total = 0;
+      if(this.carrinho.length){
+        this.carrinho.forEach(item=>{
+          total += item.preco;
+        })
+      }
+      return total;
+    }
   },
   created(){
     this.fetchProdutos()
