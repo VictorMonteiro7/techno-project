@@ -2,7 +2,9 @@ const vm = new Vue({
   el: "#app",
   data: {
     produtos: {},
-    produto: false
+    produto: false,
+    carrinhoTotal: 0,
+    carrinho: []
   },
   methods: {
     fetchProdutos(){
@@ -25,6 +27,19 @@ const vm = new Vue({
         top: 0,
         behavior: "smooth"
       })      
+    },
+    adicionarItem(){      
+      const botaoCompra = this.$refs['btn'];      
+      let estoque = this.produto.estoque;         
+      if(estoque > 0){    
+        estoque--;
+        this.produto.estoque = estoque;
+        this.carrinhoTotal++;           
+      }   
+      if(estoque === 0){
+        botaoCompra.innerText = "Produto esgotado";
+        botaoCompra.disabled = true;
+      }
     }     
   },
   created(){
