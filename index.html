@@ -19,8 +19,14 @@
 
   <body>
     <div id="app">
+      <section class="modal"></section>
       <section class="produtos">
-        <div v-for="produto in produtos" class="produto" :key="produto.id">
+        <div
+          v-for="produto in produtos"
+          class="produto"
+          :key="produto.id"
+          @click="fetchProduto(produto.id)"
+        >
           <img :src="produto.img" :alt="produto.nome" class="produto_img" />
           <div class="produto_info">
             <span class="produto_preco">{{produto.preco | numeroPreco}}</span>

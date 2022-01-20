@@ -1,14 +1,20 @@
 const vm = new Vue({
   el: "#app",
   data: {
-    produtos: {}
+    produtos: {},
+    produto: false
   },
   methods: {
     fetchProdutos(){
       fetch('./api/produtos.json')
       .then(r=>r.json())
       .then(json=>this.produtos = json)
-    }    
+    },
+    fetchProduto(id){
+      fetch(`./api/produtos/${id}/dados.json`)
+      .then(r=>r.json())
+      .then(json=>this.produto = json)
+    }     
   },
   created(){
     this.fetchProdutos()

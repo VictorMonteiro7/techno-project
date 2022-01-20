@@ -26,6 +26,7 @@ body {
   align-items: center;
   margin-bottom: 40px;
   background: #fff;
+  cursor: pointer;
   box-shadow: 0 0 2rem rgba(0, 0, 0, 0.1);
 }
 
