@@ -41,6 +41,11 @@ const vm = new Vue({
     },
     removerItem(index){
       this.carrinho.splice(index, 1)
+    },
+    checarLocalStorage(){
+      if(window.localStorage.carrinho){
+        this.carrinho = JSON.parse(localStorage.carrinho);
+      }
     }     
   },
   computed: {
@@ -55,11 +60,17 @@ const vm = new Vue({
     }
   },
   created(){
-    this.fetchProdutos()
+    this.fetchProdutos();
+    this.checarLocalStorage();
   },
   filters: {
     numeroPreco(valor){      
       return valor.toLocaleString('pt-BR',{style: "currency",currency:"BRL"})
+    }
+  },
+  watch: {
+    carrinho(){
+      window.localStorage.carrinho = JSON.stringify(this.carrinho);
     }
   }
 })
