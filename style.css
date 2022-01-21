@@ -15,6 +15,32 @@ body {
 #app {
   padding: 0 80px;
 }
+
+/* Carrinho */
+.header {
+  display: flex;
+  justify-content: space-between;
+  max-width: 900px;
+  padding: 20px 0;
+  margin: 0 auto;
+}
+.logo {
+  width: 80px;
+}
+.carrinho_menu::after {
+  content: '';
+  display: inline-block;
+  background: url('./assets/carrinho.svg');
+  width: 25px;
+  height: 25px;
+  margin-left: 10px;
+}
+.carrinho_menu {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+/* fim do Carrinho */
 /* Lista produtos */
 .produtos {
   max-width: 900px;
@@ -136,6 +162,11 @@ body {
   background: #808080;
 }
 
+.modal_btn:disabled {
+  background: #808080;
+  cursor: not-allowed;
+}
+
 .modal_fechar {
   border-radius: 50%;
   border: 2px solid #000;
@@ -147,4 +178,39 @@ body {
   font-size: 1rem;
   cursor: pointer;
   box-shadow: 0 3px 4px rgba(0, 0, 0, 0.1), 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Alerta */
+.alerta {
+  position: absolute;
+  top: 20px;
+  left: 6px;
+  z-index: 999;
+  width: 100%;
+  text-align: center;
+  display: none;
+}
+
+.alerta_msg {
+  background: #fff;
+  display: inline-block;
+  padding: 20px 40px;
+  border: 2px solid #000;
+  box-shadow: 0 3px 4px rgba(0, 0, 0, 0.1), 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.alerta.ativo {
+  display: block;
+  animation: fadeInDown 0.3s forwards;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -50px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: initial;
+  }
 }
