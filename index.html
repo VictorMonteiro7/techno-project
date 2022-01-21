@@ -42,7 +42,8 @@
           <span class="modal_preco"> {{produto.preco | numeroPreco}} </span>
           <h2 class="modal_titulo">{{produto.nome}}</h2>
           <p>{{produto.descricao}}</p>
-          <button class="modal_btn" @click="adicionarItem" ref="btn">Adicionar item</button>
+          <button class="modal_btn" @click="adicionarItem" ref="btn" v-if="produto.estoque">Adicionar item</button>
+          <button class="modal_btn" disabled @click="adicionarItem" ref="btn" v-if="produto.estoque === 0">Produto esgotado</button>
         </div>
         <div class="avaliacoes">
           <h2 class="avaliacoes_sub">Avialiações</h2>

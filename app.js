@@ -34,18 +34,13 @@ const vm = new Vue({
         behavior: "smooth"
       })      
     },
-    adicionarItem(){      
-      const botaoCompra = this.$refs['btn'];            
+    adicionarItem(){              
       if(this.produto.estoque > 0){    
         this.produto.estoque--;
         const {id, nome, preco} = this.produto;
         this.carrinho.push({id, nome, preco});
         this.alerta(`${nome} foi adicionado ao carrinho`)
       }   
-      if(this.produto.estoque === 0){
-        botaoCompra.innerText = "Produto esgotado";
-        botaoCompra.disabled = true;
-      }
     },
     removerItem(index){
       this.carrinho.splice(index, 1)
@@ -67,6 +62,10 @@ const vm = new Vue({
       if(hash){
         this.fetchProduto(hash.replace('#', ''))
       }
+    },
+    compararEstoque(){
+      const itens = this.carrinho.filter(({id})=> id === this.produto.id)
+      this.produto.estoque -= itens.length;
     }     
   },
   computed: {
@@ -97,7 +96,9 @@ const vm = new Vue({
     produto(){
       document.title = this.produto.nome || "Techno";
       const hash = this.produto.id || '';
-      history.pushState(null, null, `#${hash}`)
+      history.pushState(null, null, `#${hash}`);
+      if(this.produto)
+        this.compararEstoque()         
     }
   }
 })
